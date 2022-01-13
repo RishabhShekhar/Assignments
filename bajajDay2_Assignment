@@ -1,0 +1,30 @@
+set search_path to assignment;
+--- 1
+Select empid, empname from employeedetails where manager_id = 101;
+
+-- 2
+select count(empid) from employeedetails where project = 'P1';
+
+-- 3
+Select max(salary), min(salary), avg(salary) from employeesalary;
+
+-- 4
+select empid from employeesalary where salary between 10000 and 15000;
+
+-- 5
+select empid, salary+variable from employeesalary;
+
+--6
+select s.empid from employeedetails as d inner join employeesalary as s on d.empid = s.empid;
+
+--7
+select upper(empname), lower(city) from employeedetails;
+
+--8
+select project, count(empid) from employeedetails group by project order by count(empid) desc;
+
+--9
+select * from (select *, ROW_NUMBER() over(order by empid) as rownumber From employeedetails) t where t.rownumber%2 != 0;
+
+--10
+select salary from ( select salary, dense_rank() over(order by salary desc) r from employeesalary) t where t.r= 3;
